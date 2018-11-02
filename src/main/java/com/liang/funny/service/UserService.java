@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface UserService {
     //增加用户
-    public int addUser(User user);
+    public int addUser(Map<String, Object> map);
     //删除用户
     public boolean delUser(Integer id);
     //更新用户信息

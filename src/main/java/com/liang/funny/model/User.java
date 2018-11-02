@@ -7,7 +7,7 @@ public class User {
 
     private String name;
 
-    private String email;
+    private String password;
 
     private String telephone;
 
@@ -19,10 +19,10 @@ public class User {
 
     private Date createdTime;
 
-    public User(Integer id, String name, String email, String telephone, Boolean isAdmin, Boolean status, Date updatedTime, Date createdTime) {
+    public User(Integer id, String name, String password, String telephone, Boolean isAdmin, Boolean status, Date updatedTime, Date createdTime) {
         this.id = id;
         this.name = name;
-        this.email = email;
+        this.password = password;
         this.telephone = telephone;
         this.isAdmin = isAdmin;
         this.status = status;
@@ -50,12 +50,12 @@ public class User {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     public String getTelephone() {

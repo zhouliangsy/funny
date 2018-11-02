@@ -23,7 +23,19 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public int addUser(User user) {
+    public int addUser(Map<String, Object> map) {
+        String name = map.get("name").toString();
+        String password = "Abc1234!";
+        String telephone = map.get("telephone").toString();
+        Boolean isAdmin = Boolean.parseBoolean(map.get("isAdmin").toString());
+        Boolean status = Boolean.parseBoolean(map.get("status").toString());
+
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
+        user.setTelephone(telephone);
+        user.setIsAdmin(isAdmin);
+        user.setStatus(status);
         return userMapper.insert(user);
     }
 

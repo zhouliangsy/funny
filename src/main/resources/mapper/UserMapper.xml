@@ -5,7 +5,7 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="telephone" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="is_admin" javaType="java.lang.Boolean" jdbcType="BIT" />
       <arg column="status" javaType="java.lang.Boolean" jdbcType="BIT" />
@@ -14,7 +14,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, email, telephone, is_admin, status, updated_time, created_time
+    id, name, password, telephone, is_admin, status, updated_time, created_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -30,10 +30,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user (name, email, telephone, 
+    insert into user (name, password, telephone, 
       is_admin, status, updated_time, 
       created_time)
-    values (#{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+    values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
       #{isAdmin,jdbcType=BIT}, #{status,jdbcType=BIT}, #{updatedTime,jdbcType=TIMESTAMP}, 
       #{createdTime,jdbcType=TIMESTAMP})
   </insert>
@@ -46,8 +46,8 @@
       <if test="name != null">
         name,
       </if>
-      <if test="email != null">
-        email,
+      <if test="password != null">
+        password,
       </if>
       <if test="telephone != null">
         telephone,
@@ -69,8 +69,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
       <if test="telephone != null">
         #{telephone,jdbcType=VARCHAR},
@@ -95,8 +95,8 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="telephone != null">
         telephone = #{telephone,jdbcType=VARCHAR},
@@ -119,7 +119,7 @@
   <update id="updateByPrimaryKey" parameterType="com.liang.funny.model.User">
     update user
     set name = #{name,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
       telephone = #{telephone,jdbcType=VARCHAR},
       is_admin = #{isAdmin,jdbcType=BIT},
       status = #{status,jdbcType=BIT},

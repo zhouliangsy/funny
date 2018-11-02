@@ -21,12 +21,12 @@ public class UserController {
 
     /**
      * 新增用户
-     * @param user
+     * @param map
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public JsonResult addUserjson(@ModelAttribute User user){
-        userService.addUser(user);
+    public JsonResult addUser(@RequestBody Map<String, Object> map){
+        userService.addUser(map);
         return new JsonResult(200, true,"新增用户成功");
     }
 
