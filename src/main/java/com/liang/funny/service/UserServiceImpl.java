@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +52,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(Integer id, Map<String, Object> map) {
-        return false;
+        String name = map.get("name").toString();
+        String password = "Abc1234!";
+        String telephone = map.get("telephone").toString();
+        Boolean isAdmin = Boolean.parseBoolean(map.get("isAdmin").toString());
+        Boolean status = Boolean.parseBoolean(map.get("status").toString());
+        User user = userMapper.selectByPrimaryKey(id);
+        user.setName(name);
+        user.setTelephone(telephone);
+        user.setIsAdmin(isAdmin);
+        user.setStatus(status);
+        user.setUpdatedTime(new Date());
+        userMapper.updateByPrimaryKeySelective(user);
+        return true;
     }
 
     @Override

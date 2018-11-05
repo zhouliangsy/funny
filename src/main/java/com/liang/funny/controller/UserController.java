@@ -35,24 +35,49 @@ public class UserController {
     //最好不要有动词。
     //这里用的是路径变量，就是{}括起来的，会当做变量读进来
     //RequestBody这个注解可以接收json数据
+
+    /**
+     *
+     * 获取某一ID用户信息，必需传入id号
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/get/{id}",method = RequestMethod.GET, produces = "application/json")
-    public User getUserBy(@PathVariable("id")int userId){
+    public JsonResult getUserBy(@PathVariable("id")int userId){
         User user = userService.getUser(userId);
-        return  user;
+        return new JsonResult(200,true,"获取id="+userId+"的用户成功返回");
 
     }
 
+    /**
+     * 获得所用用户信息
+     * @return
+     */
     @RequestMapping(value = "/get",method = RequestMethod.GET, produces = "application/json")
     public List<User> getUsers(){
-        return userService.getUsers();
+       return userService.getUsers();
     }
 
+    /**
+     * 删除指定id的用户
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/del/{id}", method = RequestMethod.DELETE)
-    public boolean delUserBy(@PathVariable("id")int userId){
-        userService.delUser(userId);
-        return true;
+    public JsonResult delUserBy(@PathVariable("id")int userId){
+        Boolean res =  userService.delUser(userId);
+        if(res)
+            return new JsonResult(200,true,"成功删除用户");
+        else
+            return new JsonResult(500,false,"删除用户失败，用户或不存在");
     }
 
+    /**
+     * 更新指定id的用户信息
+     * @param id
+     * @param map
+     * @return
+     */
     @RequestMapping(value = "/update/{id}",method = RequestMethod.PUT)
     public boolean updateUser(@PathVariable("id") Integer id, @RequestBody Map<String, Object> map){
         userService.updateUser(id, map);
