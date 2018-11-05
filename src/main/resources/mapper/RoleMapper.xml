@@ -93,4 +93,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="getRoles" resultType="BaseResultMap">
+    select * from Role;
+  </select>
 </mapper>

@@ -41,14 +41,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delUser(Integer id) {
-        return false;
+    public int delUser(Integer id) {
+        return userMapper.deleteByPrimaryKey(id);
     }
-
-//    @Override
-//    public boolean updateUser(User user) {
-//        return false;
-//    }
 
     @Override
     public boolean updateUser(Integer id, Map<String, Object> map) {

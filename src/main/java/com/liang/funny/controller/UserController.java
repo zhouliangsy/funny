@@ -79,8 +79,8 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/update/{id}",method = RequestMethod.PUT)
-    public boolean updateUser(@PathVariable("id") Integer id, @RequestBody Map<String, Object> map){
+    public JsonResult updateUser(@PathVariable("id") Integer id, @RequestBody Map<String, Object> map){
         userService.updateUser(id, map);
-        return true;
+        return new JsonResult(200,true,"用户信息更新成功");
     }
 }
