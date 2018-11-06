@@ -2,9 +2,11 @@ package com.liang.funny.service;
 
 import com.liang.funny.dao.RoleMapper;
 import com.liang.funny.model.Role;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +14,9 @@ import java.util.Map;
 @Service
 public class RoleServiceImpl implements RoleService{
 
-    @Autowired
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Resource
     private RoleMapper roleMapper;
 
     @Override

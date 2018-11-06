@@ -104,4 +104,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="getAccesses" resultMap="BaseResultMap">
+    select * from access;
+  </select>
 </mapper>

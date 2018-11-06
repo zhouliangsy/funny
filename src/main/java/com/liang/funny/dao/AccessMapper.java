@@ -1,7 +1,11 @@
 package com.liang.funny.dao;
 
 import com.liang.funny.model.Access;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
+@Mapper
 public interface AccessMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +18,6 @@ public interface AccessMapper {
     int updateByPrimaryKeySelective(Access record);
 
     int updateByPrimaryKey(Access record);
+
+    List<Access> getAccesses();
 }

@@ -65,11 +65,8 @@ public class UserController {
      */
     @RequestMapping(value = "/del/{id}", method = RequestMethod.DELETE)
     public JsonResult delUserBy(@PathVariable("id")int userId){
-        Boolean res =  userService.delUser(userId);
-        if(res)
-            return new JsonResult(200,true,"成功删除用户");
-        else
-            return new JsonResult(500,false,"删除用户失败，用户或不存在");
+        userService.delUser(userId);
+        return new JsonResult(200,true,"成功删除用户");
     }
 
     /**
