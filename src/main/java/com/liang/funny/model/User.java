@@ -1,19 +1,15 @@
 package com.liang.funny.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class User {
     private Integer id;
 
     private String name;
 
     private String password;
 
-    private String telephone;
+    private String salt;
 
     private Boolean isAdmin;
 
@@ -23,11 +19,11 @@ public class User implements Serializable {
 
     private Date createdTime;
 
-    public User(Integer id, String name, String password, String telephone, Boolean isAdmin, Boolean status, Date updatedTime, Date createdTime) {
+    public User(Integer id, String name, String password, String salt, Boolean isAdmin, Boolean status, Date updatedTime, Date createdTime) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.telephone = telephone;
+        this.salt = salt;
         this.isAdmin = isAdmin;
         this.status = status;
         this.updatedTime = updatedTime;
@@ -62,12 +58,12 @@ public class User implements Serializable {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone == null ? null : telephone.trim();
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
     }
 
     public Boolean getIsAdmin() {

@@ -2,7 +2,7 @@ package com.liang.funny.controller;
 
 import com.liang.funny.model.Access;
 import com.liang.funny.service.AccessService;
-import com.liang.funny.util.JsonResult;
+import com.liang.funny.util.Json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

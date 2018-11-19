@@ -2,7 +2,7 @@ package com.liang.funny.controller;
 
 import com.liang.funny.model.User;
 import com.liang.funny.service.UserService;
-import com.liang.funny.util.JsonResult;
+import com.liang.funny.util.Json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +45,10 @@ public class UserController {
     @RequestMapping(value = "/get/{id}",method = RequestMethod.GET, produces = "application/json")
     public JsonResult getUserBy(@PathVariable("id")int userId){
         User user = userService.getUser(userId);
-        return new JsonResult(200,true,"获取id="+userId+"的用户成功返回");
-
+        if(null !=user)
+            return new JsonResult(200,true,"获取id="+userId+"的用户成功返回", user);
+        else
+            return new JsonResult(404, false,"id="+userId+"的用户不存在");
     }
 
     /**

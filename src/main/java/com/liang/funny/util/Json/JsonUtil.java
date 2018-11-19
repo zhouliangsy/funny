@@ -1,4 +1,4 @@
-package com.liang.funny.util;
+package com.liang.funny.util.Json;
 
 import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.JSON;

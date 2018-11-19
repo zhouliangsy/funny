@@ -1,4 +1,4 @@
-package com.liang.funny.util;
+package com.liang.funny.util.Json;
 
 
 import java.io.Serializable;

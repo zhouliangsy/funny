@@ -1,4 +1,4 @@
-package com.liang.funny.util;
+package com.liang.funny.util.redis;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
@@ -8,6 +8,15 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * redis 工具类
+ * 1、设置缓存失效时间
+ * 2、获取键值
+ * 3、判断键是否存在
+ * 4、删除缓存
+ * 5、等等
+ */
 public class RedisUtil {
 
     private RedisTemplate<String, Object> redisTemplate;
@@ -15,6 +24,7 @@ public class RedisUtil {
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
+
     //=============================common============================
     /**
      * 指定缓存失效时间

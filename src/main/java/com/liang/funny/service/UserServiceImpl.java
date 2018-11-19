@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(name);
         user.setPassword(password);
-        user.setTelephone(telephone);
+        user.setSalt();
         user.setIsAdmin(isAdmin);
         user.setStatus(status);
         return userMapper.insert(user);
@@ -53,8 +53,10 @@ public class UserServiceImpl implements UserService {
         Boolean isAdmin = Boolean.parseBoolean(map.get("isAdmin").toString());
         Boolean status = Boolean.parseBoolean(map.get("status").toString());
         User user = userMapper.selectByPrimaryKey(id);
+
         user.setName(name);
-        user.setTelephone(telephone);
+        user.setPassword();
+        user.setSalt();
         user.setIsAdmin(isAdmin);
         user.setStatus(status);
         user.setUpdatedTime(new Date());
