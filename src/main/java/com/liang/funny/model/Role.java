@@ -23,7 +23,6 @@ public class Role implements Serializable {
 
     private Set<User> users = new HashSet<>();
 
-
     public Set<Access> getAccesses() {
         return Accesses;
     }

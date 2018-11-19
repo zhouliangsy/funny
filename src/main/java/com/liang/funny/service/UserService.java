@@ -1,13 +1,11 @@
 package com.liang.funny.service;
 
-import com.liang.funny.model.Role;
 import com.liang.funny.model.User;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public interface UserService {
 
@@ -52,5 +50,4 @@ public interface UserService {
     //获取所有用户信息
     public List<User> getUsers();
 
-    public Set<Role> getRolesByUserId(int id);
 }

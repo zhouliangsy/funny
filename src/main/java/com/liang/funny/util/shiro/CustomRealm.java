@@ -76,8 +76,6 @@ public class CustomRealm extends AuthorizingRealm {
             }
             info.setRoles(roleIds);
         }
-
-
         return info;
     }
 
@@ -91,6 +89,8 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
+//        String username = (String) token.getPrincipal();
+
         UsernamePasswordToken upToken = (UsernamePasswordToken) token;
         String username = upToken.getUsername();
 
@@ -99,28 +99,33 @@ public class CustomRealm extends AuthorizingRealm {
             throw new AccountException("Null usernames are not allowed by this realm.");
         }
 
-        User userDB = userService.findUserByName(username);
-
-
-        if (userDB == null) {
+        //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
+        User userInfo = userService.findUserByName(username);
+        if (userInfo == null) {
             throw new UnknownAccountException("No account found for admin [" + username + "]");
+        }
+        if(userInfo.getStatus() == false) { //账户冻结
+            throw new LockedAccountException();
         }
 
         //查询用户的角色和权限存到SimpleAuthenticationInfo中，这样在其它地方
         //SecurityUtils.getSubject().getPrincipal()就能拿出用户的所有信息，包括角色和权限
-        Set<String> roles = roleService.getRolesByUserId(userDB.getId());
-        Set<String> perms = accessService.getPermsByUserId(userDB.getId());
-        userDB.getRoles().addAll(roles);
-        userDB.getPerms().addAll(perms);
+//        Set<String> roles = new HashSet<String>();
+//        for (Role role : userInfo.getRoles()) {
+//            roles.add(role.getId().toString());
+//            if (role.getAccesses().size() > 0) {
+//                Set<String> accesses = new HashSet<String>();
+//                for (Access authority : role.getAccesses())
+//                    accesses.add(authority.getTitle());
+//            }
+//        }
 
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userDB, userDB.getPwd(), getName());
-        if (userDB.getSalt() != null) {
-            info.setCredentialsSalt(ByteSource.Util.bytes(userDB.getSalt()));
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userInfo, userInfo.getPassword(), getName());
+        if (userInfo.getSalt() != null) {
+            authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(userInfo.getSalt()));
         }
-
-        return info;
+        return authenticationInfo;
 
     }
 
-}
 }

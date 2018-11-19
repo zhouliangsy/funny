@@ -79,8 +79,4 @@ public class UserServiceImpl implements UserService {
         return userMapper.findUserByName(name);
     }
 
-    @Override
-    public Set<Role> getRolesByUserId(int id) {
-        return userMapper.getRolesByUserId(id);
-    }
 }
