@@ -131,4 +131,13 @@
   <select id="getUsers" resultMap="BaseResultMap">
     select * from user
   </select>
+
+    <select id="findUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where name = #{name ,jdbcType=String}
+</select>
+
+
 </mapper>

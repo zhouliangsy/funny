@@ -1,8 +1,14 @@
 package com.liang.funny.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private Integer id;
 
     private String name;
@@ -10,6 +16,8 @@ public class User {
     private String password;
 
     private String salt;
+
+    private Set<Role> roles = new HashSet<>();
 
     private Boolean isAdmin;
 
@@ -19,20 +27,6 @@ public class User {
 
     private Date createdTime;
 
-    public User(Integer id, String name, String password, String salt, Boolean isAdmin, Boolean status, Date updatedTime, Date createdTime) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.salt = salt;
-        this.isAdmin = isAdmin;
-        this.status = status;
-        this.updatedTime = updatedTime;
-        this.createdTime = createdTime;
-    }
-
-    public User() {
-        super();
-    }
 
     public Integer getId() {
         return id;
@@ -47,7 +41,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getPassword() {
@@ -55,7 +49,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public String getSalt() {
@@ -63,15 +57,28 @@ public class User {
     }
 
     public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
+        this.salt = salt;
+    }
+
+    /**
+     * 获取权限的构造方法
+     *
+     * @return
+     */
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(Boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setIsAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 
     public Boolean getStatus() {

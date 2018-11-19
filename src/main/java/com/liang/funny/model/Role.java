@@ -2,6 +2,8 @@ package com.liang.funny.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Role implements Serializable {
 
@@ -16,6 +18,27 @@ public class Role implements Serializable {
     private Date updatedTime;
 
     private Date createdTime;
+
+    private Set<Access> Accesses = new HashSet<>();
+
+    private Set<User> users = new HashSet<>();
+
+
+    public Set<Access> getAccesses() {
+        return Accesses;
+    }
+
+    public void setAccesses(Set<Access> accesses) {
+        Accesses = accesses;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 
     public Role(Integer id, String name, Boolean status, Date updatedTime, Date createdTime) {
         this.id = id;

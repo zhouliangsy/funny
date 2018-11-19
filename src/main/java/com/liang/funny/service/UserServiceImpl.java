@@ -1,6 +1,7 @@
 package com.liang.funny.service;
 
 import com.liang.funny.dao.UserMapper;
+import com.liang.funny.model.Role;
 import com.liang.funny.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 用户操作实现类
@@ -27,7 +29,6 @@ public class UserServiceImpl implements UserService {
     public int addUser(Map<String, Object> map) {
         String name = map.get("name").toString();
         String password = "Abc1234!";
-        String telephone = map.get("telephone").toString();
         Boolean isAdmin = Boolean.parseBoolean(map.get("isAdmin").toString());
         Boolean status = Boolean.parseBoolean(map.get("status").toString());
 
@@ -49,7 +50,6 @@ public class UserServiceImpl implements UserService {
     public boolean updateUser(Integer id, Map<String, Object> map) {
         String name = map.get("name").toString();
         String password = "Abc1234!";
-        String telephone = map.get("telephone").toString();
         Boolean isAdmin = Boolean.parseBoolean(map.get("isAdmin").toString());
         Boolean status = Boolean.parseBoolean(map.get("status").toString());
         User user = userMapper.selectByPrimaryKey(id);
@@ -72,5 +72,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsers() {
         return userMapper.getUsers();
+    }
+
+    @Override
+    public User findUserByName(String name) {
+        return userMapper.findUserByName(name);
+    }
+
+    @Override
+    public Set<Role> getRolesByUserId(int id) {
+        return userMapper.getRolesByUserId(id);
     }
 }

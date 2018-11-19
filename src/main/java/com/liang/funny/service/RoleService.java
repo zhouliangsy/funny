@@ -16,4 +16,5 @@ public interface RoleService {
     public Role getRole(int id);
     //获取所有角色信息
     public List<Role> getRoles();
+
 }
