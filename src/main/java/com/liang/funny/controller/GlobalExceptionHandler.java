@@ -1,6 +1,7 @@
 package com.liang.funny.controller;
 
-import com.liang.funny.util.Json.JsonUtil;
+import com.liang.funny.util.Codes;
+import com.liang.funny.util.Json.Json;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -26,29 +27,29 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ShiroException.class)
     @ResponseBody
-    public JsonUtil handleShiroException(ShiroException e) {
+    public Json handleShiroException(ShiroException e) {
         String eName = e.getClass().getSimpleName();
         log.error("shiro执行出错：{}",eName);
-        return new JsonUtil(eName, false, Codes.SHIRO_ERR, "鉴权或授权过程出错", null);
+        return new Json(eName, false, Codes.SHIRO_ERR, "鉴权或授权过程出错", null);
     }
 
     @ExceptionHandler(UnauthenticatedException.class)
     @ResponseBody
-    public JsonUtil page401(UnauthenticatedException e) {
+    public Json page401(UnauthenticatedException e) {
         String eMsg = e.getMessage();
         if (StringUtils.startsWithIgnoreCase(eMsg,GUEST_ONLY)){
-            return new JsonUtil("401", false, Codes.UNAUTHEN, "只允许游客访问，若您已登录，请先退出登录", null)
+            return new Json("401", false, Codes.UNAUTHEN, "只允许游客访问，若您已登录，请先退出登录", null)
                     .data("detail",e.getMessage());
         }else{
-            return new JsonUtil("401", false, Codes.UNAUTHEN, "用户未登录", null)
+            return new Json("401", false, Codes.UNAUTHEN, "用户未登录", null)
                     .data("detail",e.getMessage());
         }
     }
 
     @ExceptionHandler(UnauthorizedException.class)
     @ResponseBody
-    public JsonUtil page403() {
-        return new JsonUtil("403", false, Codes.UNAUTHZ, "用户没有访问权限", null);
+    public Json page403() {
+        return new Json("403", false, Codes.UNAUTHZ, "用户没有访问权限", null);
     }
 
 }

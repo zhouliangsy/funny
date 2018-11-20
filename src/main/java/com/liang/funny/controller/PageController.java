@@ -1,6 +1,6 @@
 package com.liang.funny.controller;
 
-import com.liang.funny.util.Json.JsonUtil;
+import com.liang.funny.util.Json.Json;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ public class PageController {
     // shiro.loginUrl映射到这里，我在这里直接抛出异常交给GlobalExceptionHandler来统一返回json信息，
     // 您也可以在这里json，不过这样子就跟GlobalExceptionHandler中返回的json重复了。
     @RequestMapping("/401")
-    public JsonUtil page401() {
+    public Json page401() {
         throw new UnauthenticatedException();
     }
 
@@ -21,13 +21,13 @@ public class PageController {
     // 也就是说在ShiroConfig中如果没有roles[js],perms[mvn:install]这样的权限访问控制配置的话，
     // 是不会跳转到这里的。
     @RequestMapping("/403")
-    public JsonUtil page403() {
+    public Json page403() {
         throw new UnauthorizedException();
     }
 
     @RequestMapping("/index")
-    public JsonUtil pageIndex() {
-        return new JsonUtil("index",true,1,"index page",null);
+    public Json pageIndex() {
+        return new Json("index",true,1,"index page",null);
     }
 
 

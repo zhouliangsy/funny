@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
         User user = new User();
         user.setName(name);
-        user.setSalt(name);
+        user.setSalt(user.getId().toString());//此处可以使用随机数生成盐值
         user.setPassword(new SimpleHash(Sha256Hash.ALGORITHM_NAME, password, ByteSource.Util.bytes(user.getSalt()), 1024).toString());
 
         user.setIsAdmin(isAdmin);
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectByPrimaryKey(id);
 
         user.setName(name);
-        user.setSalt(name);
+        user.setSalt(user.getId().toString());
         user.setPassword(new SimpleHash(Sha256Hash.ALGORITHM_NAME, password, ByteSource.Util.bytes(user.getSalt()), 1024).toString());
         user.setIsAdmin(isAdmin);
         user.setStatus(status);

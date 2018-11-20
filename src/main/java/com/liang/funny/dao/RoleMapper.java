@@ -1,9 +1,11 @@
 package com.liang.funny.dao;
 
 import com.liang.funny.model.Role;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);
 
