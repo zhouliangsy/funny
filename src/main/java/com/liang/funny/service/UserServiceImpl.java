@@ -1,8 +1,10 @@
 package com.liang.funny.service;
 
 import com.liang.funny.dao.UserMapper;
-import com.liang.funny.model.Role;
 import com.liang.funny.model.User;
+import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,6 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 用户操作实现类
@@ -34,8 +35,9 @@ public class UserServiceImpl implements UserService {
 
         User user = new User();
         user.setName(name);
-        user.setPassword(password);
-        user.setSalt();
+        user.setSalt(name);
+        user.setPassword(new SimpleHash(Sha256Hash.ALGORITHM_NAME, password, ByteSource.Util.bytes(user.getSalt()), 1024).toString());
+
         user.setIsAdmin(isAdmin);
         user.setStatus(status);
         return userMapper.insert(user);
@@ -49,14 +51,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(Integer id, Map<String, Object> map) {
         String name = map.get("name").toString();
-        String password = "Abc1234!";
+        String password = map.get("password").toString();
         Boolean isAdmin = Boolean.parseBoolean(map.get("isAdmin").toString());
         Boolean status = Boolean.parseBoolean(map.get("status").toString());
         User user = userMapper.selectByPrimaryKey(id);
 
         user.setName(name);
-        user.setPassword();
-        user.setSalt();
+        user.setSalt(name);
+        user.setPassword(new SimpleHash(Sha256Hash.ALGORITHM_NAME, password, ByteSource.Util.bytes(user.getSalt()), 1024).toString());
         user.setIsAdmin(isAdmin);
         user.setStatus(status);
         user.setUpdatedTime(new Date());

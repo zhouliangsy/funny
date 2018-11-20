@@ -3,8 +3,6 @@ package com.liang.funny.util.shiro;
 import com.liang.funny.model.Access;
 import com.liang.funny.model.Role;
 import com.liang.funny.model.User;
-import com.liang.funny.service.AccessService;
-import com.liang.funny.service.RoleService;
 import com.liang.funny.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -27,20 +25,17 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private RoleService roleService;
-    @Autowired
-    private AccessService accessService;
 
     /**
+     * 详细可以参考https://github.com/xlui/Spring-Boot-Examples/tree/master/spring-boot-shiro 关于加密的两种方式
      * 告诉shiro如何根据获取到的用户信息中的密码和盐值来校验密码
      */
     {
         //设置用于匹配密码的CredentialsMatcher
         HashedCredentialsMatcher hashMatcher = new HashedCredentialsMatcher();
-        hashMatcher.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);
+        hashMatcher.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);//此处有多种选择 Md2Hash Md5Hash Sha1Hash Sha256Hash Sha384Hash Sha512Hash SimpleHash
         hashMatcher.setStoredCredentialsHexEncoded(false);
-        hashMatcher.setHashIterations(1024);
+        hashMatcher.setHashIterations(1024);//散列的次数，比如散列两次，相当于 Sha256Hash.ALGORITHM_NAME(Sha256Hash.ALGORITHM_NAME(""));
         this.setCredentialsMatcher(hashMatcher);
     }
 
