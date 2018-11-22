@@ -2,6 +2,7 @@ package com.liang.funny.util.shiro;
 
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,21 +18,12 @@ public class ShiroConfig {
         return new MyRealm();
     }
 
-//    @Bean
-//    public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
-//        DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
-//        /**
-//         * setUsePrefix(false)用于解决一个奇怪的bug。在引入spring aop的情况下。
-//         * 在@Controller注解的类的方法中加入@RequiresRole注解，会导致该方法无法映射请求，导致返回404。
-//         * 加入这项配置能解决这个bug
-//         */
-//        creator.setUsePrefix(true);
-//        return creator;
-//    }
-
     /**
+     * 定义拦截的规则
+     *
      * 这里统一做鉴权，即判断哪些请求路径需要用户登录，哪些请求路径不需要用户登录。
      * 这里只做鉴权，不做权限控制，因为权限用注解来做。
+     *
      * @return
      */
     @Bean
@@ -51,4 +43,14 @@ public class ShiroConfig {
         return chain;
     }
 
+
+    /*
+    创建安全管理器对象,关联自定义Realm
+     */
+    @Bean
+    public DefaultWebSecurityManager securityManager(MyRealm myRealm) {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setRealm(myRealm);
+        return securityManager;
+    }
 }

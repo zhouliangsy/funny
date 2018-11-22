@@ -13,8 +13,8 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +23,7 @@ import java.util.Set;
  */
 public class MyRealm extends AuthorizingRealm {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     /**
