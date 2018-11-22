@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * 这个类是参照JDBCRealm写的，主要是自定义了如何查询用户信息，如何查询用户的角色和权限，如何校验密码等逻辑
  */
-public class CustomRealm extends AuthorizingRealm {
+public class MyRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
