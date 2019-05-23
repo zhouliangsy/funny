@@ -54,6 +54,31 @@ spring:
     password:
     database: 0
 
+  kafka:
+    bootstrap-servers: 167.179.84.191:9092 #可以分别设置生产者和消费者各自的
+
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        linger.ms: 1
+
+    consumer:
+      enable-auto-commit: false
+      auto-commit-interval: 100ms
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        session.timeout.ms: 15000
+      group-id: foo
+      auto-offset-reset: earliest
+
+
+netty:
+  port: 7000
 
 
 mybatis:
@@ -61,5 +86,48 @@ mybatis:
   type-aliases-package: com.liang.funny.model
 
 
+#pagehelper分页插件配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: countSql
+
+
 logging:
-  config: classpath:logback-spring.xml
+  config: classpath:logback-spring.xml #日志路径 级别都在这个文件里设定了，无需再此文件设置
+
+#dubbo设置
+dubbo:
+  application:
+    name: dubbo-provider
+  registry:
+    address: 192.168.84.191:2181
+    protocol: zookeeper
+  protocol:
+    name: dubbo
+    port: 8001
+  scan:
+    base-packages: com.liang.funny.provider
+
+#  #提供者配置：
+#  #当前应用的名字
+#  dubbo.application.name=dubbo-provider
+#  #指定注册中心的地址和协议
+#  dubbo.registry.address=xx.xx.xx.xx:2181
+#  dubbo.registry.protocol=zookeeper
+#  #使用dubbo协议，将服务暴露在端口8001
+#  dubbo.protocol.name=dubbo
+#  dubbo.protocol.port=8001
+#  #基础包扫描
+#  dubbo.scan.base-packages=com.wangcw.dubbo.provider
+#
+#
+#  #消费者配置：
+#  dubbo.application.name=dubbo-consumer
+#  dubbo.protocol.name=dubbo
+#  dubbo.registry.protocol=zookeeper
+#  dubbo.registry.address=xx.xx.xx.xx:2181
+#  dubbo.scan.base-packages=com.wangcw.duboo.consumer
+
+
