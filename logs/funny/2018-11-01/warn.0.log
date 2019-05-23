@@ -1,9 +1,0 @@
-[WARN ] 2018-11-01 10:38:11 [http-nio-8080-exec-1] o.s.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/users] in DispatcherServlet with name 'dispatcherServlet'
-[WARN ] 2018-11-01 10:38:11 [http-nio-8080-exec-2] o.s.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/users] in DispatcherServlet with name 'dispatcherServlet'
-[WARN ] 2018-11-01 10:38:11 [http-nio-8080-exec-6] o.s.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/users] in DispatcherServlet with name 'dispatcherServlet'
-[WARN ] 2018-11-01 10:38:11 [http-nio-8080-exec-5] o.s.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/user] in DispatcherServlet with name 'dispatcherServlet'
-[WARN ] 2018-11-01 10:38:11 [http-nio-8080-exec-1] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
-[WARN ] 2018-11-01 10:59:11 [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'userController' method 
-public com.liang.funny.util.Json.JsonResult com.liang.funny.controller.UserController.addUserjson(com.liang.funny.model.User)
-to {[/user/add],methods=[POST]}: There is already 'userController' bean method
-public int com.liang.funny.controller.UserController.addUser(com.liang.funny.model.User) mapped.
